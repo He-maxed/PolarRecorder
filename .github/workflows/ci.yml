@@ -43,8 +43,13 @@ jobs:
 
       - name: Run tests
         run: ./gradlew :app:test --scan
-      - name: Upload APK
+        
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-debug-apk
-          path: app/build/outputs/apk/debug/*.apk
+          path: |
+            app/build/outputs/apk/debug/*.apk
+            app/build/outputs/apk/*/debug/*.apk
+          if-no-files-found: error
+    
